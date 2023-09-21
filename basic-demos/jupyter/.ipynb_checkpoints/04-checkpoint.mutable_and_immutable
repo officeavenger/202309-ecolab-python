@@ -1,0 +1,308 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "0055bf39-8e1f-4ab7-b39b-e64123ca26a9",
+   "metadata": {},
+   "source": [
+    "# Object vs Reference\n",
+    "\n",
+    "* A variable name in python is always a reference\n",
+    "      * compare it to a c++ pointer or java reference rather than regular variable\n",
+    "      * there is no value type\n",
+    "\n",
+    "* when we declare  **x=20**,  we actually create\n",
+    "      *  a reference \"x\" that can refer to anything\n",
+    "      *  x currently refers to a dynamic value of type int and value 20\n",
+    "\n",
+    "* Every object (not variable) has a\n",
+    "      * type\n",
+    "      * id\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "d7f47f90-dff1-4677-b0c4-efa2669a0b0e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def show_info(x):\n",
+    "    print(f'type:{type(x)}\\tvalue={x}\\tid={id(x)}')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "f54af5f8-b668-45e8-a550-6f8273afc295",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "type:<class 'int'>\tvalue=20\tid=140705688642952\n",
+      "type:<class 'str'>\tvalue=hi\tid=2457862230512\n"
+     ]
+    }
+   ],
+   "source": [
+    "show_info(20)\n",
+    "show_info('hi')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "8db6858f-51ac-4245-a46a-a29a227fe37c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "type:<class 'int'>\tvalue=20\tid=140705688642952\n"
+     ]
+    }
+   ],
+   "source": [
+    "show_info(20)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "945c7829-01b5-4e5b-95f9-80d59e5b0422",
+   "metadata": {},
+   "source": [
+    "### Mutable and Immutable Objects\n",
+    "\n",
+    "* A mutable object can be modified\n",
+    "* An immutable object can't be modifed\n",
+    "* You may be surprised to know a lot of python objects are immutable inlcuding\n",
+    "      * str\n",
+    "      * int\n",
+    "      * float\n",
+    "      * bool\n",
+    "\n",
+    "* yes even int is mutable"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "81656c22-9483-4c44-ac06-9701cdc6ad40",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "type:<class 'int'>\tvalue=20\tid=140705688642952\n"
+     ]
+    }
+   ],
+   "source": [
+    "x=20\n",
+    "show_info(x)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "2675581e-874c-4a0a-adc4-84fe10f6b833",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "type:<class 'int'>\tvalue=21\tid=140705688642984\n"
+     ]
+    }
+   ],
+   "source": [
+    "x+=1 # now x refers to a new object with value 21. old object is not modified\n",
+    "show_info(x)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ea57edbc-8550-446b-8c34-27bd6b904ed7",
+   "metadata": {},
+   "source": [
+    "### String is immutable\n",
+    "\n",
+    "* string object is immutable\n",
+    "      * original value can't be changed\n",
+    "* There are several function in string that can manipulate it\n",
+    "      * substr()\n",
+    "      * lower()\n",
+    "      * upper()\n",
+    "\n",
+    "* Each of these creates a new string object and doesn't change the original"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "a4d932fc-8080-4cbe-a719-4e97d4cadffc",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "type:<class 'str'>\tvalue=india\tid=2457952070000\n"
+     ]
+    }
+   ],
+   "source": [
+    "str=\"india\"\n",
+    "\n",
+    "show_info(str)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "b85623ef-4c05-4304-b88f-3cc2b83bd1da",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "type:<class 'str'>\tvalue=INDIA\tid=2457951822768\n"
+     ]
+    }
+   ],
+   "source": [
+    "show_info(str.upper())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "7f8ee5d6-19d3-4512-a82c-29400a2e4088",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "india\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(str)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a5a71e0e-b933-4d7e-b8de-2443d645f85f",
+   "metadata": {},
+   "source": [
+    "### we can make it look mutable by updating the reference"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "6adae489-facf-4594-a522-141eea6d87c5",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "INDIA\n"
+     ]
+    }
+   ],
+   "source": [
+    "str = str.upper() # now same str refers to new object\n",
+    "print(str)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "4f454fde-f395-4e87-b78c-04d69e4d5fda",
+   "metadata": {},
+   "source": [
+    "### Few Important string functions\n",
+    "\n",
+    "* upper()\n",
+    "* lower()\n",
+    "* ljust() ---> jusfies a string in a given space\n",
+    "* rjust() ---> right aligns string in given space\n",
+    "* center() ---> centers string in given space"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "05fe177d-bcbf-4154-b970-5118e20a16de",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "str=\"Hello World\""
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "f33aef63-75bb-4773-b924-f7683ab844cf",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "*Hello World*\n",
+      "*Hello World                                                                                         *\n",
+      "*                                                                                         Hello World*\n",
+      "*                                            Hello World                                             *\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f'*{str}*')\n",
+    "print(f'*{str.ljust(100)}*')\n",
+    "print(f'*{str.rjust(100)}*')\n",
+    "print(f'*{str.center(100)}*')\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "c29a0610-bc4e-4aa4-b9ae-de3307d78b93",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
