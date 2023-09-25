@@ -1,10 +1,14 @@
+#NOT RECOMMENDED
+#from utils.dates import * #import everything
+
+from utils.dates import date_to_week_day,days_in_month,day_name
 
 def print_calendar_horizontal(month,year):
     startDay=date_to_week_day(1,month,year)
     days=days_in_month(month,year)
-    week=['Sun','Mon','Tue','wed','thu','fri','Sat']
-    for i in week:
-        print(i.upper(),end="\t")
+    
+    for i in range(7):
+        print(day_name(i)[0:3].upper(),end="\t")
     d=1
     i=0
     print()
